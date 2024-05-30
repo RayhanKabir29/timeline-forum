@@ -8,6 +8,7 @@ function App() {
   const [users, setUsers] = useState({});
   const [comments, setComments] = useState({});
   const [loader, setLoader] = useState(false);
+
   const fetchData = async () => {
     setLoader(true);
     const postsResponse = await axios.get(
@@ -41,13 +42,14 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <div className="bg-gradient-to-b from-cyan-50 to-blue-100">
       <h1 className="text-center py-8 font-bold">Timeline Forum</h1>
       <hr />
       <div className="content-container mt-4 px-10">
         {loader ? (
-         <Spin />
+          <Spin />
         ) : (
           <PostList posts={posts} users={users} comments={comments} />
         )}
