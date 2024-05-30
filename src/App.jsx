@@ -42,10 +42,10 @@ function App() {
     fetchData();
   }, []);
   return (
-    <div className="bg-gradient-to-b from-cyan-100 to-blue-100">
+    <div className="bg-gradient-to-b from-cyan-50 to-blue-100">
       <h1 className="text-center py-8 font-bold">Timeline Forum</h1>
       <hr />
-      <div className="content-container mt-4">
+      <div className="content-container mt-4 px-10">
         {loader ? (
          <Spin />
         ) : (
