@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PostList from "./components/PostList";
+import { Spin } from "antd";
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
   const [comments, setComments] = useState({});
+  const [loader, setLoader] = useState(false);
   const fetchData = async () => {
+    setLoader(true);
     const postsResponse = await axios.get(
       "https://jsonplaceholder.typicode.com/posts"
     );
@@ -33,6 +36,7 @@ function App() {
     setPosts(postsResponse.data.sort((a, b) => b.id - a.id));
     setUsers(usersMap);
     setComments(commentsMap);
+    setLoader(false);
   };
   useEffect(() => {
     fetchData();
@@ -42,7 +46,11 @@ function App() {
       <h1 className="text-center py-8 font-bold">Timeline Forum</h1>
       <hr />
       <div className="content-container mt-4">
-        <PostList posts={posts} users={users} comments={comments} />
+        {loader ? (
+         <Spin />
+        ) : (
+          <PostList posts={posts} users={users} comments={comments} />
+        )}
       </div>
     </div>
   );
